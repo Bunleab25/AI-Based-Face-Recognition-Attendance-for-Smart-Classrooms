@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+
+# Data / Models (regenerate or user-specific)
+dataset/
+model/trainingData.yml
+attendance.csv
+usersdatabase.db
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/

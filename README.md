@@ -349,6 +349,50 @@ Controls:
 - press `q` to quit,
 - press `Esc` to quit.
 
+## Flow Chart
+
+The following Mermaid flow chart shows the complete project workflow from setup to attendance logging:
+
+```mermaid
+flowchart TD
+	A[Start Project] --> B[Run creat_db.py]
+	B --> C[Create usersdatabase.db]
+	C --> D[Create users table]
+	C --> E[Create attendance table]
+	D --> F[Run data_set.py]
+	E --> F
+	F --> G[Enter user details<br/>Name, Major, Sex]
+	G --> H[Open webcam]
+	H --> I[Detect face with Haar cascade]
+	I --> J[Capture 100 face images]
+	J --> K[Save images in dataset/<br/>User.id.image.jpg]
+	K --> L[Insert user data into SQLite]
+	L --> M[Run training.py]
+	M --> N[Load images from dataset]
+	N --> O[Extract user IDs from filenames]
+	O --> P[Train LBPH recognizer]
+	P --> Q[Save model to model/trainingData.yml]
+	Q --> R[Run detection.py]
+	R --> S[Load trained model]
+	S --> T[Open webcam for live recognition]
+	T --> U[Detect face in each frame]
+	U --> V[Predict user ID and confidence]
+	V --> W{Confidence below threshold?}
+	W -->|Yes| X[Fetch user info from users table]
+	W -->|No| Y[Label as Unknown]
+	X --> Z{Already recorded in this session?}
+	Z -->|No| AA[Write attendance to attendance.csv]
+	AA --> AB[Insert attendance into attendance table]
+	AB --> AC[Display recognized name]
+	Z -->|Yes| AC
+	Y --> AD[Display Unknown on screen]
+	AC --> AE[Continue live detection]
+	AD --> AE
+	AE --> AF{Press q or Esc?}
+	AF -->|No| U
+	AF -->|Yes| AG[Close webcam and end]
+```
+
 ## Recognition Threshold
 
 In `detection.py`, the default threshold is:

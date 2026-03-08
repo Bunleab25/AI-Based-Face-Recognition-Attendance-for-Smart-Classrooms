@@ -566,9 +566,9 @@ The script name `creat_db.py` is kept as-is in this project. If you rename it la
 
 ## License
 
-No license file is currently included in the repository.
+This project is licensed under the MIT License.
 
-If you want to share or publish this project, add a `LICENSE` file and specify the intended license clearly.
+See the `LICENSE` file for the full text.
 
 ## Acknowledgements
 
